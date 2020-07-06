@@ -21,9 +21,17 @@ public class ProfileNamesAdapter extends RecyclerView.Adapter<ProfileNamesAdapte
     private ArrayList<ResultItem> profilesNames;
     private Context context;
 
+    public ProfileNamesAdapter(){
+
+    }
     public ProfileNamesAdapter(Context context, ArrayList<ResultItem> profilesNames) {
         this.context = context;
         this.profilesNames = profilesNames;
+    }
+
+    public void updateAll(ArrayList<ResultItem> profilesNamesList){
+        this.profilesNames.addAll(profilesNamesList);
+        notifyDataSetChanged();
     }
 
     @NonNull

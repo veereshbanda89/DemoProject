@@ -38,6 +38,8 @@ public class HomeActivity<RetrieveTask> extends AppCompatActivity implements Api
     private RecyclerView profileNamesRecyclerView;
     private ResultDatabase resultDatabase;
     private ResultRepository resultRepository;
+    private LinearLayoutManager verticalLayoutManager;
+    private ProfileNamesAdapter profileNamesListAdapter = new ProfileNamesAdapter();
 
     private boolean isLoading = true;
     private int pastVisibleItems=0,visibleItem_Count=0,totalItem_Count=0,previous_total=0;//Variables for Pagination
@@ -52,6 +54,10 @@ public class HomeActivity<RetrieveTask> extends AppCompatActivity implements Api
 
         progressBar = findViewById(R.id.progressBar);
         profileNamesRecyclerView = findViewById(R.id.profileNamesRecyclerView);
+        profileNamesRecyclerView.setHasFixedSize(true);
+        verticalLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        profileNamesRecyclerView.setLayoutManager(verticalLayoutManager);
+        profileNamesRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         homeViewModel.apiFailureListener = this;
@@ -98,15 +104,15 @@ public class HomeActivity<RetrieveTask> extends AppCompatActivity implements Api
                                     resultItem.getPhone(),resultItem.getDob(),resultItem.getLastName(),
                                     resultItem.getId(),resultItem.getFirstName(),resultItem.getEmail(),resultItem.getStatus(),resultItem.getLinks()));
         }
-        displayList();
+        if(page_number==1) {
+            displayList();
+        }else{
+            profileNamesListAdapter.updateAll(profileNames);
+        }
     }
 
     private void setProfileNames(ArrayList<ResultItem> profileNames) {
-        ProfileNamesAdapter profileNamesListAdapter = new ProfileNamesAdapter(getApplicationContext(), profileNames);
-        profileNamesRecyclerView.setHasFixedSize(true);
-        LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        profileNamesRecyclerView.setLayoutManager(verticalLayoutManager);
-        profileNamesRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        profileNamesListAdapter = new ProfileNamesAdapter(getApplicationContext(), profileNames);
         profileNamesRecyclerView.setAdapter(profileNamesListAdapter);
 
         profileNamesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

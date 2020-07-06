@@ -20,10 +20,4 @@ public interface ResultItemDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(ResultItem resultItem);
-
-    @Update
-    void update(ResultItem resultItem);
-
-    @Delete
-    void delete(ResultItem resultItem);
 }
