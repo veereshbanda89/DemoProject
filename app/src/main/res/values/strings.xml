@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Demo Project</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
+    <string name="gender">Gender</string>
+    <string name="no_internet_connection">No data available. Please connect to internet for the first time</string>
+</resources>
