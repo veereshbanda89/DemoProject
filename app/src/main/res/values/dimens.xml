@@ -8,5 +8,7 @@
     <dimen name="layoutWidth">150dp</dimen>
     <dimen name="layoutWidthFirstName">190dp</dimen>
     <dimen name="margin15dp">15dp</dimen>
+    <dimen name="textFontToolbar">20sp</dimen>
+    <dimen name="margin140dp">140dp</dimen>
 
 </resources>
